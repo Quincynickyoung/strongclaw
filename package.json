@@ -13,7 +13,8 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "test": "tsx test/basic.test.ts",
-    "test:all": "tsx test/basic.test.ts && tsx test/conversation.test.ts",
+    "test:all": "tsx test/basic.test.ts && tsx test/conversation.test.ts && tsx test/model-provider.test.ts",
+    "test:models": "tsx test/model-provider.test.ts",
     "cli": "tsx src/index.ts"
   },
   "keywords": [

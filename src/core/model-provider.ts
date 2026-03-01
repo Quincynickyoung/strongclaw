@@ -187,3 +187,62 @@ export function printAvailableProviders(): void {
     console.log();
   });
 }
+
+/**
+ * 获取提供商的友好名称
+ */
+export function getProviderDisplayName(provider: ModelProvider): string {
+  const names: Record<ModelProvider, string> = {
+    anthropic: 'Anthropic Claude',
+    google: 'Google Gemini',
+    moonshot: 'Moonshot Kimi',
+    deepseek: 'DeepSeek',
+    qwen: 'Alibaba Qwen',
+    openrouter: 'OpenRouter',
+    together: 'Together AI',
+  };
+  return names[provider];
+}
+
+/**
+ * 验证 API Key 格式（基础检查）
+ */
+export function validateApiKey(provider: ModelProvider, apiKey: string): boolean {
+  if (!apiKey || apiKey.trim().length === 0) {
+    return false;
+  }
+
+  // 基础长度检查
+  if (apiKey.length < 10) {
+    return false;
+  }
+
+  // 提供商特定的格式检查
+  switch (provider) {
+    case 'anthropic':
+      return apiKey.startsWith('sk-ant-');
+    case 'google':
+      return apiKey.length > 20; // Google API keys are typically longer
+    case 'openrouter':
+      return apiKey.startsWith('sk-or-');
+    default:
+      return true; // 其他提供商暂不做特殊检查
+  }
+}
+
+/**
+ * 获取模型的推荐使用场景
+ */
+export function getModelRecommendation(provider: ModelProvider): string {
+  const recommendations: Record<ModelProvider, string> = {
+    google: '免费额度大，适合新手和日常使用',
+    deepseek: '国内速度快，价格低，适合高频使用',
+    qwen: '中文理解好，适合中文任务',
+    moonshot: '长上下文支持，适合处理大文件',
+    anthropic: '性能强，理解力好，适合复杂任务',
+    openrouter: '一个 Key 访问所有模型，适合需要多模型的场景',
+    together: '开源模型，适合实验和研究',
+  };
+  return recommendations[provider];
+}
+
