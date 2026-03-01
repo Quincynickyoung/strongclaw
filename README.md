@@ -150,6 +150,35 @@ npm run dev -- --model gemini-2.0-flash --provider google
 
 ---
 
+## 🎓 Skills 系统
+
+StrongClaw 通过 Skills 扩展能力。Skills 是 Markdown 文档，不是代码！
+
+### 现有 Skills
+
+- **File Operations** - 批量文件操作、分析、备份
+- **Git Operations** - 代码审查、分支管理、提交整理
+
+### 如何使用
+
+```
+🦅 > 帮我批量重命名所有 .txt 文件为 .md
+🦅 > 创建一个新的功能分支并提交代码
+🦅 > 查找所有大于 1MB 的文件
+```
+
+Agent 会自动读取相关 Skill，理解并执行任务。
+
+### 创建自己的 Skill
+
+1. 在 `skills/` 目录创建 `.md` 文件
+2. 编写知识和示例
+3. 测试并分享
+
+详见 [Skills 文档](skills/README.md)
+
+---
+
 ## 📊 开发进度
 
 ### ✅ 已完成
@@ -160,6 +189,8 @@ npm run dev -- --model gemini-2.0-flash --provider google
 - [x] Phase 1.5: 命令系统
 - [x] Phase 1.5: 使用文档
 - [x] Phase 1.5.1: 多模型支持
+- [x] Phase 1.6: 项目完善（License、贡献指南、模板）
+- [x] Phase 1.7: Skills 系统
 
 ### 🚧 进行中
 
@@ -186,7 +217,23 @@ strongclaw/
 │   │   └── model-provider.ts  # 模型提供商管理
 │   ├── cli.ts                  # CLI 界面
 │   └── index.ts                # 入口文件
+├── skills/                     # Skills 知识库
+│   ├── file-operations.md      # 文件操作 Skill
+│   ├── git-operations.md       # Git 操作 Skill
+│   └── README.md               # Skills 文档
 ├── test/
+│   ├── basic.test.ts           # 基础测试
+│   ├── conversation.test.ts    # 对话测试
+│   └── model-provider.test.ts  # 模型测试
+├── docs/
+│   ├── PHILOSOPHY.md           # 核心思想
+│   ├── USAGE.md                # 使用指南
+│   └── MODELS.md               # 模型配置
+├── .github/                    # GitHub 模板
+├── demo.sh                     # 快速演示
+├── auto-commit.sh              # 自动提交
+└── package.json
+```
 │   ├── basic.test.ts           # 基础测试
 │   └── conversation.test.ts    # 对话测试
 ├── docs/
