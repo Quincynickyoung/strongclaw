@@ -2,6 +2,37 @@
 
 ## 2026-03-01
 
+### Phase 1.7: Skills 系统 ✅
+
+**完成的工作：**
+
+1. **Skills 基础设施**
+   - 创建 `skills/` 目录
+   - 编写 Skills 系统文档
+   - 创建 Skills README
+
+2. **示例 Skills**
+   - File Operations Skill - 文件操作能力
+   - Git Operations Skill - Git 版本控制能力
+
+3. **文档更新**
+   - 更新主 README 添加 Skills 说明
+   - 更新项目结构展示
+
+**Skills 特点：**
+- 📝 Markdown 文档，不是代码
+- 🧠 知识驱动，Agent 自己理解
+- 🔄 可组合，多个 Skills 协同
+- 📈 自动提升，模型升级受益
+
+**提交记录：**
+```
+703c816 📝 Update README with Skills system documentation and progress
+c2db90e ✨ Add Skills system with file-operations and git-operations examples
+```
+
+---
+
 ### Phase 1.6: 项目完善 ✅
 
 **完成的工作：**
@@ -27,6 +58,9 @@
 
 **提交记录：**
 ```
+0f29d2e 🔧 Add GitHub issue and PR templates for better collaboration
+4ce0541 📝 Add .env.example with comprehensive API key configuration guide
+4136e0a ✅ Add model provider tests and enhance validation functions
 fcb4aef 📦 Enhance package.json with metadata, repository info and more keywords
 c80186f 📝 Add comprehensive contributing guide
 41f2ee6 ✨ Enhance README with badges, better structure and professional layout
