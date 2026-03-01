@@ -1,20 +1,52 @@
 {
   "name": "strongclaw",
   "version": "0.1.0",
-  "description": "StrongClaw - A powerful AI agent platform built on Pi philosophy",
+  "description": "StrongClaw - A powerful AI agent platform built on Pi philosophy. 4 tools + infinite possibilities.",
   "type": "module",
   "main": "dist/index.js",
+  "bin": {
+    "strongclaw": "./dist/index.js"
+  },
   "scripts": {
     "dev": "tsx src/index.ts",
     "dev:verbose": "tsx src/index.ts --verbose",
     "build": "tsc",
     "start": "node dist/index.js",
     "test": "tsx test/basic.test.ts",
+    "test:all": "tsx test/basic.test.ts && tsx test/conversation.test.ts",
     "cli": "tsx src/index.ts"
   },
-  "keywords": ["ai", "agent", "pi", "claude"],
-  "author": "Qiang Yang",
+  "keywords": [
+    "ai",
+    "agent",
+    "pi",
+    "claude",
+    "llm",
+    "chatbot",
+    "automation",
+    "coding-agent",
+    "gemini",
+    "deepseek",
+    "qwen",
+    "openrouter"
+  ],
+  "author": {
+    "name": "Qiang Yang",
+    "url": "https://github.com/Quincynickyoung"
+  },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Quincynickyoung/strongclaw.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Quincynickyoung/strongclaw/issues"
+  },
+  "homepage": "https://github.com/Quincynickyoung/strongclaw#readme",
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=9.0.0"
+  },
   "dependencies": {
     "@mariozechner/pi-coding-agent": "latest"
   },
