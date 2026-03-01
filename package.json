@@ -1,0 +1,26 @@
+{
+  "name": "strongclaw",
+  "version": "0.1.0",
+  "description": "StrongClaw - A powerful AI agent platform built on Pi philosophy",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "dev:verbose": "tsx src/index.ts --verbose",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "tsx test/basic.test.ts",
+    "cli": "tsx src/index.ts"
+  },
+  "keywords": ["ai", "agent", "pi", "claude"],
+  "author": "Qiang Yang",
+  "license": "MIT",
+  "dependencies": {
+    "@mariozechner/pi-coding-agent": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
+  }
+}
