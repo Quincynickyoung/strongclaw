@@ -1,8 +1,32 @@
-# StrongClaw
+<div align="center">
 
-> A powerful AI agent platform built on Pi philosophy
+# 🦅 StrongClaw
 
-## 核心思想
+**A powerful AI agent platform built on Pi philosophy**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-20+-green.svg)](https://nodejs.org/)
+[![GitHub Stars](https://img.shields.io/github/stars/Quincynickyoung/strongclaw?style=social)](https://github.com/Quincynickyoung/strongclaw)
+
+[English](#) | [中文文档](#)
+
+</div>
+
+---
+
+## ✨ 特性
+
+- 🎯 **极简工具** - 只有 4 个基础工具（read, write, edit, bash）
+- 🧠 **知识驱动** - Skills 是 Markdown 文档，不是代码
+- 🚀 **多模型支持** - 支持 7 个主流 LLM 提供商
+- ⚡️ **高性能** - 最大化 Prompt Caching，速度提升 10 倍
+- 🔒 **安全可靠** - 权限控制和沙箱隔离
+- 🎨 **易于扩展** - 通过 Skills 添加新能力
+
+---
+
+## 🎯 核心思想
 
 StrongClaw 遵循 Pi 的极简哲学：
 
@@ -58,55 +82,125 @@ bash   → 执行命令（手）
 
 ---
 
-## 快速开始
+## 🚀 快速开始
 
-### 1. 设置 API Key
-
-```bash
-export ANTHROPIC_API_KEY=your-api-key-here
-```
-
-### 2. 安装依赖
+### 安装
 
 ```bash
+# 克隆仓库
+git clone https://github.com/Quincynickyoung/strongclaw.git
+cd strongclaw
+
+# 安装依赖
 npm install
 ```
 
-### 3. 启动 CLI
+### 配置
+
+选择一个模型提供商并设置 API Key：
 
 ```bash
-npm run dev
+# 推荐：Google Gemini（免费额度大）
+export GOOGLE_API_KEY=your-key
+
+# 或：DeepSeek（国内速度快，价格低）
+export DEEPSEEK_API_KEY=your-key
+
+# 或：Anthropic Claude（性能强）
+export ANTHROPIC_API_KEY=your-key
 ```
 
-### 4. 开始对话
+详细配置请查看 [模型配置文档](docs/MODELS.md)
+
+### 启动
+
+```bash
+# 自动检测可用模型
+npm run dev
+
+# 或指定模型
+npm run dev -- --model gemini-2.0-flash --provider google
+```
+
+### 使用
 
 ```
 🦅 > 列出当前目录的文件
 🦅 > 帮我分析一下 package.json
-🦅 > 创建一个 hello.txt 文件
+🦅 > 创建一个 hello.txt 文件，内容是 "Hello, StrongClaw!"
 ```
 
 详细使用说明请查看 [使用指南](docs/USAGE.md)
 
 ---
 
-## 项目结构
+## 📦 支持的模型
+
+| 提供商 | 推荐场景 | 价格 |
+|--------|---------|------|
+| **Google Gemini** | 新手，免费额度大 | ⭐️⭐️⭐️⭐️⭐️ |
+| **DeepSeek** | 国内用户，价格低 | ⭐️⭐️⭐️⭐️⭐️ |
+| **Alibaba Qwen** | 中文理解好 | ⭐️⭐️⭐️⭐️ |
+| **Moonshot Kimi** | 长上下文 | ⭐️⭐️⭐️ |
+| **Anthropic Claude** | 性能强 | ⭐️⭐️⭐️ |
+| **OpenRouter** | 一个 Key 访问所有 | ⭐️⭐️⭐️⭐️ |
+| **Together AI** | 开源模型 | ⭐️⭐️⭐️⭐️ |
+
+详细配置请查看 [模型配置文档](docs/MODELS.md)
+
+---
+
+## 📊 开发进度
+
+### ✅ 已完成
+
+- [x] Phase 1: 核心引擎搭建
+- [x] Phase 1: 基础测试
+- [x] Phase 1.5: 交互式 CLI
+- [x] Phase 1.5: 命令系统
+- [x] Phase 1.5: 使用文档
+- [x] Phase 1.5.1: 多模型支持
+
+### 🚧 进行中
+
+- [ ] Phase 2: Gateway 层
+- [ ] Phase 2: 消息路由
+- [ ] Phase 2: 权限控制
+
+### 📋 计划中
+
+- [ ] Phase 3: Electron GUI
+- [ ] Phase 3: 流式消息渲染
+- [ ] Phase 4: 飞书 Bot
+- [ ] Phase 4: Docker 沙箱
+
+---
+
+## 📁 项目结构
 
 ```
 strongclaw/
 ├── src/
-│   ├── core/           # 核心引擎
-│   ├── gateway/        # 消息路由和权限控制
-│   ├── channels/       # 通信渠道（Electron、飞书等）
-│   └── index.ts        # 入口
-├── skills/             # Skills 知识库
-├── test/               # 测试
-└── docs/               # 文档
+│   ├── core/
+│   │   ├── strongclaw.ts      # 核心引擎
+│   │   └── model-provider.ts  # 模型提供商管理
+│   ├── cli.ts                  # CLI 界面
+│   └── index.ts                # 入口文件
+├── test/
+│   ├── basic.test.ts           # 基础测试
+│   └── conversation.test.ts    # 对话测试
+├── docs/
+│   ├── PHILOSOPHY.md           # 核心思想
+│   ├── USAGE.md                # 使用指南
+│   └── MODELS.md               # 模型配置
+├── demo.sh                     # 快速演示
+├── auto-commit.sh              # 自动提交
+└── package.json
 ```
 
 ---
 
-## 设计原则
+## 🎨 设计原则
 
 1. **极简主义** - 只保留最核心的功能
 2. **可组合性** - 通过组合而非堆砌实现复杂功能
@@ -115,59 +209,53 @@ strongclaw/
 
 ---
 
----
+## 📚 文档
 
-## 开发进度
-
-### ✅ 已完成
-
-| 阶段 | 功能 | 状态 |
-|------|------|------|
-| Phase 1 | 核心引擎搭建 | ✅ 完成 |
-| Phase 1 | 基础测试 | ✅ 完成 |
-| Phase 1.5 | 交互式 CLI | ✅ 完成 |
-| Phase 1.5 | 命令系统 | ✅ 完成 |
-| Phase 1.5 | 使用文档 | ✅ 完成 |
-
-### 🚧 进行中
-
-| 阶段 | 功能 | 状态 |
-|------|------|------|
-| Phase 1.5 | 多模型支持 | 🚧 开发中 |
-
-### 📋 待办事项
-
-| 阶段 | 功能 | 优先级 |
-|------|------|--------|
-| Phase 2 | Gateway 层 | 高 |
-| Phase 2 | 消息路由 | 高 |
-| Phase 2 | 权限控制 | 高 |
-| Phase 3 | Electron GUI | 中 |
-| Phase 3 | 流式消息渲染 | 中 |
-| Phase 4 | 飞书 Bot | 低 |
-| Phase 4 | Docker 沙箱 | 低 |
+- [核心思想](docs/PHILOSOPHY.md) - 为什么 StrongClaw 这样设计
+- [使用指南](docs/USAGE.md) - 详细的使用说明
+- [模型配置](docs/MODELS.md) - 多模型配置指南
+- [GitHub 指南](GITHUB-GUIDE.md) - Git 和 GitHub 使用
+- [更新日志](CHANGELOG.md) - 版本更新记录
 
 ---
 
-## 支持的模型
+## 🤝 贡献
 
-StrongClaw 支持多个主流 LLM 提供商：
+欢迎贡献代码、报告问题或提出建议！
 
-### 官方 API
-- **Anthropic Claude** - claude-sonnet-4, claude-opus-4
-- **Google Gemini** - gemini-2.0-flash, gemini-pro
-- **Moonshot Kimi** - moonshot-v1-8k, moonshot-v1-32k
-- **DeepSeek** - deepseek-chat, deepseek-coder
-- **Alibaba Qwen** - qwen-turbo, qwen-plus, qwen-max
-
-### 聚合服务商
-- **OpenRouter** - 支持 100+ 模型
-- **Together AI** - 支持开源模型
-
-详细配置请查看 [模型配置文档](docs/MODELS.md)
+1. Fork 本仓库
+2. 创建你的特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交你的更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 打开一个 Pull Request
 
 ---
 
-## License
+## 📄 License
 
-MIT
+本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情
+
+---
+
+## 🙏 致谢
+
+- [Pi](https://github.com/mariozechner/pi) - 核心理念来源
+- [Claude Code](https://github.com/anthropics/claude-code) - 灵感来源
+- [Anthropic](https://www.anthropic.com/) - Claude API
+
+---
+
+## 📮 联系方式
+
+- GitHub: [@Quincynickyoung](https://github.com/Quincynickyoung)
+- 项目地址: [https://github.com/Quincynickyoung/strongclaw](https://github.com/Quincynickyoung/strongclaw)
+
+---
+
+<div align="center">
+
+**如果这个项目对你有帮助，请给一个 ⭐️ Star！**
+
+Made with ❤️ by Qiang Yang & Claude Opus 4.6
+
+</div>
