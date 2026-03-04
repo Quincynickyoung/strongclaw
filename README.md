@@ -191,12 +191,12 @@ Agent 会自动读取相关 Skill，理解并执行任务。
 - [x] Phase 1.5.1: 多模型支持
 - [x] Phase 1.6: 项目完善（License、贡献指南、模板）
 - [x] Phase 1.7: Skills 系统
+- [x] Phase 2: Gateway 层（消息路由、权限控制、会话管理）
 
 ### 🚧 进行中
 
-- [ ] Phase 2: Gateway 层
-- [ ] Phase 2: 消息路由
-- [ ] Phase 2: 权限控制
+- [ ] Phase 3: Electron GUI
+- [ ] Phase 3: 流式消息渲染
 
 ### 📋 计划中
 
@@ -215,6 +215,13 @@ strongclaw/
 │   ├── core/
 │   │   ├── strongclaw.ts      # 核心引擎
 │   │   └── model-provider.ts  # 模型提供商管理
+│   ├── gateway/                # Gateway 层
+│   │   ├── gateway.ts          # Gateway 主类
+│   │   ├── event-bus.ts        # 事件总线
+│   │   ├── permission-checker.ts # 权限检查
+│   │   ├── session-manager.ts  # 会话管理
+│   │   ├── message-router.ts   # 消息路由
+│   │   └── types.ts            # 类型定义
 │   ├── cli.ts                  # CLI 界面
 │   └── index.ts                # 入口文件
 ├── skills/                     # Skills 知识库
@@ -224,11 +231,13 @@ strongclaw/
 ├── test/
 │   ├── basic.test.ts           # 基础测试
 │   ├── conversation.test.ts    # 对话测试
-│   └── model-provider.test.ts  # 模型测试
+│   ├── model-provider.test.ts  # 模型测试
+│   └── gateway.test.ts         # Gateway 测试
 ├── docs/
 │   ├── PHILOSOPHY.md           # 核心思想
 │   ├── USAGE.md                # 使用指南
-│   └── MODELS.md               # 模型配置
+│   ├── MODELS.md               # 模型配置
+│   └── GATEWAY.md              # Gateway 文档
 ├── .github/                    # GitHub 模板
 ├── demo.sh                     # 快速演示
 ├── auto-commit.sh              # 自动提交
