@@ -13,6 +13,15 @@ import {
   printAvailableProviders,
   type ModelProvider,
 } from './core/model-provider.js';
+import {
+  WELCOME_MESSAGE,
+  HELP_MESSAGE,
+  INFO_TEMPLATE,
+  getRandomTip,
+  showExamples,
+} from './cli-messages.js';
+import { loadConfig, showConfig, updateConfig } from './config-manager.js';
+import { recordConversation, showHistory, clearHistory } from './history-manager.js';
 
 /**
  * CLI 配置
@@ -45,26 +54,22 @@ export class StrongClawCLI {
    * 启动 CLI
    */
   async start(): Promise<void> {
-    console.log('╔════════════════════════════════════════════════════════════╗');
-    console.log('║                                                            ║');
-    console.log('║              🦅 StrongClaw - AI Agent 平台                ║');
-    console.log('║                                                            ║');
-    console.log('║  核心理念：极简工具 + 知识驱动 + 信任模型 = 无限可能      ║');
-    console.log('║                                                            ║');
-    console.log('╚════════════════════════════════════════════════════════════╝');
-    console.log('');
-    console.log('📋 核心思想：');
-    console.log('  • 4 个基础工具：read, write, edit, bash');
-    console.log('  • Skills = 知识库，不是工具库');
-    console.log('  • 最大化 Prompt Caching');
-    console.log('  • 不和模型对赌');
-    console.log('');
-    console.log('💡 命令：');
-    console.log('  /help      - 显示帮助');
-    console.log('  /info      - 显示会话信息');
-    console.log('  /models    - 显示可用模型');
-    console.log('  /clear     - 清屏');
-    console.log('  /exit      - 退出');
+    // 加载用户配置
+    const userConfig = loadConfig();
+
+    // 合并配置
+    if (userConfig.defaultProvider && !this.config.provider) {
+      this.config.provider = userConfig.defaultProvider;
+    }
+    if (userConfig.defaultModel && !this.config.model) {
+      this.config.model = userConfig.defaultModel;
+    }
+    if (userConfig.verbose !== undefined && this.config.verbose === false) {
+      this.config.verbose = userConfig.verbose;
+    }
+
+    console.log(WELCOME_MESSAGE);
+    console.log(getRandomTip());
     console.log('');
 
     // 初始化会话
@@ -182,6 +187,26 @@ export class StrongClawCLI {
         this.showModels();
         break;
 
+      case '/skills':
+        this.showSkills();
+        break;
+
+      case '/examples':
+        this.showExamples();
+        break;
+
+      case '/config':
+        showConfig();
+        break;
+
+      case '/history':
+        showHistory();
+        break;
+
+      case '/clear-history':
+        clearHistory();
+        break;
+
       case '/clear':
         console.clear();
         break;
@@ -217,6 +242,9 @@ export class StrongClawCLI {
       console.log('');
       console.log(response);
       console.log('');
+
+      // 记录对话历史
+      recordConversation(message, response, this.config.workingDirectory);
     } catch (error) {
       console.error('❌ 错误:', error);
       console.log('');
@@ -227,48 +255,14 @@ export class StrongClawCLI {
    * 显示帮助
    */
   private showHelp(): void {
-    console.log('');
-    console.log('📖 StrongClaw CLI 帮助');
-    console.log('');
-    console.log('命令：');
-    console.log('  /help    - 显示此帮助信息');
-    console.log('  /info    - 显示会话信息');
-    console.log('  /clear   - 清屏');
-    console.log('  /exit    - 退出程序');
-    console.log('');
-    console.log('使用方式：');
-    console.log('  直接输入你的问题或指令，Agent 会自动执行');
-    console.log('');
-    console.log('示例：');
-    console.log('  • 列出当前目录的文件');
-    console.log('  • 帮我分析一下 package.json');
-    console.log('  • 创建一个 hello.txt 文件，内容是 "Hello, StrongClaw!"');
-    console.log('  • 查找所有 .ts 文件');
-    console.log('');
-    console.log('核心理念：');
-    console.log('  StrongClaw 只有 4 个基础工具（read, write, edit, bash）');
-    console.log('  但通过无限组合，可以完成任何任务');
-    console.log('');
+    console.log(HELP_MESSAGE);
   }
 
   /**
    * 显示会话信息
    */
   private showInfo(): void {
-    console.log('');
-    console.log('ℹ️  会话信息');
-    console.log('');
-    console.log(`工作目录: ${this.config.workingDirectory}`);
-    console.log(`模型: ${this.config.model || '自动检测'}`);
-    console.log(`提供商: ${this.config.provider || '自动检测'}`);
-    console.log(`详细日志: ${this.config.verbose ? '开启' : '关闭'}`);
-    console.log('');
-    console.log('核心工具：');
-    console.log('  • read   - 读取文件');
-    console.log('  • write  - 写入文件');
-    console.log('  • edit   - 编辑文件');
-    console.log('  • bash   - 执行命令');
-    console.log('');
+    console.log(INFO_TEMPLATE(this.config));
   }
 
   /**
@@ -279,6 +273,30 @@ export class StrongClawCLI {
     console.log('📦 可用的模型提供商');
     console.log('');
     printAvailableProviders();
+  }
+
+  /**
+   * 显示可用 Skills
+   */
+  private showSkills(): void {
+    console.log('');
+    console.log('📚 可用的 Skills');
+    console.log('');
+    console.log('Skills 是知识库，Agent 会自动使用它们来完成任务');
+    console.log('');
+    console.log('当前可用的 Skills：');
+    console.log('  • file-operations.md - 文件操作相关知识');
+    console.log('  • git-operations.md  - Git 操作相关知识');
+    console.log('');
+    console.log('Skills 位置: skills/ 目录');
+    console.log('');
+  }
+
+  /**
+   * 显示使用示例
+   */
+  private showExamples(): void {
+    console.log(showExamples());
   }
 }
 
