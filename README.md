@@ -130,6 +130,29 @@ npm run dev -- --model gemini-2.0-flash --provider google
 🦅 > 创建一个 hello.txt 文件，内容是 "Hello, StrongClaw!"
 ```
 
+**可用命令：**
+- `/help` - 显示帮助
+- `/examples` - 显示使用示例
+- `/skills` - 显示可用 Skills
+- `/config` - 显示配置
+- `/history` - 显示历史记录
+
+**配置管理：**
+
+StrongClaw 支持持久化配置，无需每次都指定模型：
+
+```bash
+# 配置文件位置
+~/.strongclaw/config.json
+
+# 示例配置
+{
+  "defaultProvider": "google",
+  "defaultModel": "gemini-2.0-flash",
+  "verbose": false
+}
+```
+
 详细使用说明请查看 [使用指南](docs/USAGE.md)
 
 ---
