@@ -13,8 +13,9 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "test": "tsx test/basic.test.ts",
-    "test:all": "tsx test/basic.test.ts && tsx test/conversation.test.ts && tsx test/model-provider.test.ts",
+    "test:all": "tsx test/basic.test.ts && tsx test/conversation.test.ts && tsx test/model-provider.test.ts && tsx test/gateway.test.ts",
     "test:models": "tsx test/model-provider.test.ts",
+    "test:gateway": "tsx test/gateway.test.ts",
     "cli": "tsx src/index.ts"
   },
   "keywords": [
