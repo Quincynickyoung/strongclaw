@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "StrongClaw - A powerful AI agent platform built on Pi philosophy. 4 tools + infinite possibilities.",
   "type": "module",
-  "main": "dist/index.js",
+  "main": "electron/main.js",
   "bin": {
     "strongclaw": "./dist/index.js"
   },
@@ -16,7 +16,10 @@
     "test:all": "tsx test/basic.test.ts && tsx test/conversation.test.ts && tsx test/model-provider.test.ts && tsx test/gateway.test.ts",
     "test:models": "tsx test/model-provider.test.ts",
     "test:gateway": "tsx test/gateway.test.ts",
-    "cli": "tsx src/index.ts"
+    "cli": "tsx src/index.ts",
+    "electron": "electron .",
+    "electron:dev": "electron . --dev",
+    "build:electron": "tsc && electron-builder"
   },
   "keywords": [
     "ai",
@@ -54,6 +57,9 @@
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
+    "electron": "^28.3.3",
+    "electron-builder": "^24.13.3",
+    "electron-store": "^11.0.2",
     "tsx": "^4.0.0",
     "typescript": "^5.0.0"
   }

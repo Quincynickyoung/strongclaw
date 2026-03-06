@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StrongClaw - AI Agent Platform</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- 侧边栏 -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1 class="logo">
+          <span class="logo-icon">🦅</span>
+          <span class="logo-text">StrongClaw</span>
+        </h1>
+      </div>
+
+      <div class="sidebar-content">
+        <!-- 会话列表 -->
+        <div class="sessions">
+          <div class="sessions-header">
+            <h2>会话</h2>
+            <button class="btn-new-session" id="newSessionBtn">
+              <span>+</span> 新建
+            </button>
+          </div>
+          <ul class="session-list" id="sessionList">
+            <li class="session-item active">
+              <span class="session-name">新会话</span>
+              <span class="session-time">刚刚</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 设置 -->
+        <div class="sidebar-footer">
+          <button class="btn-settings" id="settingsBtn">
+            <span>⚙️</span> 设置
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 主内容区 -->
+    <main class="main-content">
+      <!-- 顶部栏 -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <select class="model-selector" id="modelSelector">
+            <option value="gemini-3-flash">Gemini 3 Flash</option>
+            <option value="gemini-3-pro">Gemini 3 Pro</option>
+            <option value="claude-4.6-sonnet">Claude 4.6 Sonnet</option>
+            <option value="deepseek-r1">DeepSeek R1</option>
+            <option value="kimi-k2.5">Kimi K2.5</option>
+            <option value="qwen-3.5-turbo">Qwen 3.5 Turbo</option>
+          </select>
+        </div>
+        <div class="topbar-right">
+          <button class="btn-icon" id="clearBtn" title="清空对话">
+            <span>🗑️</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- 聊天区域 -->
+      <div class="chat-container">
+        <div class="messages" id="messages">
+          <!-- 欢迎消息 -->
+          <div class="message-welcome">
+            <div class="welcome-icon">🦅</div>
+            <h2>欢迎使用 StrongClaw</h2>
+            <p>基于 Pi 哲学的 AI Agent 平台</p>
+            <div class="welcome-features">
+              <div class="feature">
+                <span class="feature-icon">👁️</span>
+                <span>读取文件</span>
+              </div>
+              <div class="feature">
+                <span class="feature-icon">✍️</span>
+                <span>写入文件</span>
+              </div>
+              <div class="feature">
+                <span class="feature-icon">✏️</span>
+                <span>编辑文件</span>
+              </div>
+              <div class="feature">
+                <span class="feature-icon">🖐️</span>
+                <span>执行命令</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 输入区域 -->
+        <div class="input-container">
+          <div class="input-wrapper">
+            <textarea
+              class="message-input"
+              id="messageInput"
+              placeholder="输入消息... (Shift+Enter 换行，Enter 发送)"
+              rows="1"
+            ></textarea>
+            <button class="btn-send" id="sendBtn">
+              <span>➤</span>
+            </button>
+          </div>
+          <div class="input-footer">
+            <span class="input-hint">4 个工具 + 无限可能</span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- 设置面板 -->
+  <div class="modal" id="settingsModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>设置</h2>
+        <button class="btn-close" id="closeSettingsBtn">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="setting-group">
+          <label>主题</label>
+          <select id="themeSelector">
+            <option value="dark">深色</option>
+            <option value="light">浅色</option>
+          </select>
+        </div>
+        <div class="setting-group">
+          <label>默认模型</label>
+          <select id="defaultModelSelector">
+            <option value="gemini-3-flash">Gemini 3 Flash</option>
+            <option value="gemini-3-pro">Gemini 3 Pro</option>
+            <option value="claude-4.6-sonnet">Claude 4.6 Sonnet</option>
+            <option value="deepseek-r1">DeepSeek R1</option>
+            <option value="kimi-k2.5">Kimi K2.5</option>
+            <option value="qwen-3.5-turbo">Qwen 3.5 Turbo</option>
+          </select>
+        </div>
+        <div class="setting-group">
+          <label>API Keys</label>
+          <input type="password" id="googleApiKey" placeholder="Google API Key">
+          <input type="password" id="anthropicApiKey" placeholder="Anthropic API Key">
+          <input type="password" id="deepseekApiKey" placeholder="DeepSeek API Key">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-primary" id="saveSettingsBtn">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
